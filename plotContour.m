@@ -5,6 +5,7 @@ warning off
 % imgStr=input('image filename (.___): '); %take user input for image name
 % imgStr='akku.png';
 code_path='C:\Users\User1\Desktop'; % your/path/here
+mkdir('cplots');
 save_path1='C:\Users\User1\Desktop\cplots';
 
 %% Set parameters
@@ -12,13 +13,14 @@ lvls=7; % levels of contour plot
 radP=50; % radius for gaussian filter
 stdP=50; % standard deviation for gaussian filter
 % imgStr = 'img.jpg'; % Input for function, unless you want to use as script
-
+color = 'green';  % red, green, or blue
 %% Don't edit these
 cd(code_path)
 A=imread(imgStr);
+colors={'red' 1; 'green' 2; 'blue' 3};
+indC=strmatch(color,colors(:,1));
 map=[];
-map(1:4,3)=0;
-map(1:lvls,1)=.1:(1/lvls):1;
+map(1:lvls,indC)=.1:(1/lvls):1;
 F=rgb2gray(A);
 
 %% Blob type thing, all red
