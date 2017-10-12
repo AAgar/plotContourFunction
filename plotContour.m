@@ -13,13 +13,13 @@ lvls=7; % levels of contour plot
 radP=50; % radius for gaussian filter
 stdP=50; % standard deviation for gaussian filter
 % imgStr = 'img.jpg'; % Input for function, unless you want to use as script
-color = 'green';  % red, green, or blue
+color = 'red';  % red, green, or blue
 %% Don't edit these
 cd(code_path)
 A=imread(imgStr);
 colors={'red' 1; 'green' 2; 'blue' 3};
 indC=strmatch(color,colors(:,1));
-map=[];
+map=zeros(3,3);
 map(1:lvls,indC)=.1:(1/lvls):1;
 F=rgb2gray(A);
 
@@ -37,10 +37,12 @@ colormap(map);
 colorbar('eastoutside');
 set(gca,'XTickLabel','')
 set(gca,'YTickLabel','')
+set(gca,'YDir','reverse')
 % lgd2=legend('show');
 title(['Filled Contour: Gaussian Filter (' num2str(stdP) ' std), ' num2str(lvls) ' lvls']);
 
-filename=['levels_' num2str(lvls) '_std_' num2str(stdP)];
+
+filename=['levels_' num2str(lvls) '_std_' num2str(stdP) '_color_' color];
 saveas(gcf, [filename '.png'])
 saveas(gcf, [filename '.fig'])
 cd(code_path)
